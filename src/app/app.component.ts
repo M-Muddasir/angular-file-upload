@@ -38,11 +38,9 @@ export class AppComponent {
     const formData = new FormData();
     formData.append('photo', this.userForm.get('photo').value);
     this.http.post('http://localhost:8082/upload', formData).subscribe(resp => {
-      if(resp['status'] != 'success') {
-        this.uploadError = resp['statusMessage'];
-        return;
+      if(resp['status'] == 'success') {
+        alert('File saved in file-upload-server/uploads');
       }
-      this.router.navigate(['/users'])
     }, (resp)=> {
       this.uploadError = 'Some error occured please try later';
       console.log(resp);
